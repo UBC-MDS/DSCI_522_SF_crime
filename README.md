@@ -11,10 +11,13 @@
 - [Link to Python script for downloading dataset](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.py)
 
 # Research Question
-> What are the strongest predictors for whether a crime instance in San Francisco resulted in an arrest?
-> This question is a predictive question.
+
+What are the strongest predictors for whether a crime instance in San Francisco resulted in an arrest?
+
+This question is a predictive question.
 
 # Objective
+
 The goal of our project is to implement a classification of the San Francisco crime data with a decision tree. 
 
 The following table outlines the features we will be using to build the classifier:
