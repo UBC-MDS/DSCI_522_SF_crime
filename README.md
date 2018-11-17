@@ -36,7 +36,7 @@ The following table outlines the features we will be using to build the classifi
 
 </center>
 
-The final target response variables of our classifer is resolution, which consist of 2 classes: "arrested" and "not arrested".
+The final target response variable is resolution, which consist of 2 classes: "arrested" and "not arrested".
 
 # Analysis Plan
 
