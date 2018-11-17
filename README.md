@@ -1,4 +1,4 @@
-# SF_crime
+# San Francisco Crime Data
 # Collaborators:
 
 - [Betty Zhou](https://github.com/bettybhzhou)
@@ -34,7 +34,7 @@ The following table outlines the features we will be using to build the classifi
 | Longitude | Continuous |
 | Latitude | Continuous |
 
-<center>
+</center>
 
 The final target response variables of our classifer is resolution, which consist of 2 classes: "arrested" and "not arrested".
 
