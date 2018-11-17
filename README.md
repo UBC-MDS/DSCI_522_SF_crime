@@ -1,8 +1,8 @@
 # SF_crime
 # Collaborators:
 
-- [Betty Zhou] (https://github.com/bettybhzhou)
-- [Ian Flores] (https://github.com/ian-flores)
+- [Betty Zhou](https://github.com/bettybhzhou)
+- [Ian Flores](https://github.com/ian-flores)
 
 # Dataset
 
@@ -47,5 +47,5 @@ The final target response variables of our classifer is resolution, which consis
 
 # Summary of results
 
-> We will summarize our data by reporting a table of the strongest predictor for whether a crime instance in San Francisco resulted in an arrest. The strongest predictors are the predictors that show up earlier in our decision tree as this indicates that these predictors will have the lowest gini scores and are the best predictors for the dataset. We will also report a graphviz plot of our decision tree. 
+We will summarize our data by reporting a table of the strongest predictor for whether a crime instance in San Francisco resulted in an arrest. The strongest predictors are the predictors that show up earlier in our decision tree as this indicates that these predictors will have the lowest gini scores and are the best predictors for the dataset. We will also report a graphviz plot of our decision tree. 
 
