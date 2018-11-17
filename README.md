@@ -50,5 +50,5 @@ The final target response variable is resolution, which consist of 2 classes: "a
 
 # Summary of results
 
-We will summarize our data by reporting a table of the strongest predictor for whether a crime instance in San Francisco resulted in an arrest. The strongest predictors are the predictors that show up earlier in our decision tree as this indicates that these predictors will have the lowest gini scores and are the best predictors for the dataset. We will also report a graphviz plot of our decision tree. 
+We will summarize our data by reporting a table of the strongest predictors for whether a crime instance in San Francisco resulted in an arrest. The strongest predictors are the predictors that show up earlier in our decision tree as these predictors are chosen by the algorithm as the best predictors for the target classes. We will also report a classification error of our model. Finally, the report will include a graphviz plot of our decision tree. 
 
