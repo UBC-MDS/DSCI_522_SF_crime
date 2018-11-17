@@ -46,9 +46,9 @@ The final target response variable is resolution, which consist of 2 classes: "a
 
 3. Since we have over 2 million observations in our dataset, we will split our dataset into training and validation sets at a 50:50 ratio.
 
-3. scikit-learn will be used to train the model.
+3. Scikit-learn will be used to train the model.
 
-# Summary of results
+# Summary of Results
 
 We will summarize our data by reporting a table of the strongest predictors for whether a crime instance in San Francisco resulted in an arrest. The strongest predictors are the predictors that show up earlier in our decision tree as these predictors are chosen by the algorithm as the best predictors for the target classes. We will also report a classification error of our model. Finally, the report will include a graphviz plot of our decision tree. 
 
