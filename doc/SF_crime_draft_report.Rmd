@@ -1,0 +1,56 @@
+---
+title: "San Francisco Crime Classifier"
+author: Betty Zhou and Ian Flores  
+date: November 24, 2018
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(imager)
+```
+
+# Table of Contents
+
+1) Introduction
+2) Usage
+  - Dependencies
+3) Dataset
+4) Exploratory Analysis
+5) Analysis
+6) Assumptions
+7) Limitations and Future Directions
+
+# 3.0 Exploratory Data Analysis
+
+Exploratory analysis was performed on the cleaned dataset to better understand the trends of different variables in our dataset. 
+
+First, we checked the overall ratio of our target classes:
+
+```{r target_check_fig, fig.align='center', message = FALSE, echo=FALSE}
+knitr::include_graphics(here::here("results/figures/target_plot.png"))
+```
+<center>
+Figure ... . Bar graph to check the balance in the target class. 
+</center>
+
+Next, we investigated all the predictors in the data set in relation to our target class for 100,000 crime instances. The features that were explored include: category, day of week, description, police district, time, longitude, latitude, month of report and day of report, in respect to whether the resolution of the crime instance was processed or non-processed. The features that demonstrated to be good predictors for segregrating processed from non-processed crime resolutions are shown below.
+
+
+
+```{r data, echo=FALSE}
+sf_data <- read.csv(here::here("data/clean_sf_data.csv"))
+
+knitr::kable(head(sf_data))
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
