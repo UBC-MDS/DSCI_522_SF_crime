@@ -67,10 +67,10 @@ We will summarize our data by reporting a table of the strongest predictors for 
 ## Dependencies:
 - R $ R libraries
   - `rmarkdown`  
-  - `knitr`. 
-  - `tidyverse`. 
-  - `ggmap`. 
-  - `maps`. 
+  - `knitr`  
+  - `tidyverse`  
+  - `ggmap`  
+  - `maps`  
 
 - Python & Python libraries:
   - `matplotlib`
