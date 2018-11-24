@@ -5,6 +5,17 @@
 
 
 #!/usr/bin/env python
+# EDA.py
+# Betty Zhou, November 23, 2018
+#
+# This script generates exploratory data analysis figures such as bar graphs for 
+# categorical variables and histograms for continuous variables. This script takes 
+# a clean .csv file and an output file path as the variable arguments. 
+#
+# Dependencies: argparse, pandas, numpy, seaborn, matplotlib
+#
+# Usage: python EDA.py "clean_sf_data.csv" "results/figures/"
+
 import argparse
 import pandas as pd
 import numpy as np
@@ -20,9 +31,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument('input_file')
 parser.add_argument('output_file')
 args = parser.parse_args()
-
-#input_file = "../data/clean_sf_data.csv"
-#output_file = "../results/figures/"
 
 def main():
     
