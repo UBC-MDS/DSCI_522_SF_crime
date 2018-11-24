@@ -8,7 +8,6 @@ Collaborators:
 
 # Project Overview
 
-
 ## Objective  
 The goal of this project is to implement a classification of the San Francisco crime data with a decision tree to predict the resolution of a crime instance. The resolution of a crime instance can be either "processed" or "non-processed". Processed indicates that a crime instance resulted in a subject being processed into the justice system.
 
@@ -24,6 +23,8 @@ The dataset can be found at the following link:
 
 The dataset can be loaded using this [R script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.R)
 or this [Python script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.py). The following is a preview of the dataset in R:
+
+![](https://github.com/bettybhzhou/DSCI_522_SF_crime/blob/master/results/figures/head_raw_data.png)
 
 # Analysis Plan
 
