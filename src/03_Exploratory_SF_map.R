@@ -1,6 +1,6 @@
 #! /usr/bin/env Rscript
 # Exploratory_SF_map.R
-# Betty Zhou, November 23, 2018
+# Betty Zhou & Ian Flores Siaca, November 23, 2018
 #
 # This script generates a map of San Francisco with crime density overlayed on top as a png output. This # script takes in a .csv and the output path as the variable arguments.
 #
@@ -34,17 +34,18 @@ main <- function(){
     ggmap()
 
   SF_crime_map <- basemap + 
-   geom_density2d(aes(x, y),
-                 data = non_processed,
-                 colour = 'blue') +
-    geom_density2d(aes(x, y),
-                 data = processed,
-                 colour = 'red') +
-    xlab("longitude") + 
-    ylab("latitude")
+   geom_density2d(aes(x, y, colour = 'blue'),
+                 data = non_processed) +
+    geom_density2d(aes(x, y, colour = 'red'),
+                 data = processed) +
+    scale_color_manual("Resolution of the Incident", 
+                       values = c(blue = 'blue', red = 'red'),
+                       labels = c('Non Processed', 'Processed')) +
+    xlab("Longitude") + 
+    ylab("Latitude") 
 
   # Save SF crime map 
-  ggsave("SF_crime.png", plot = SF_crime_map, path = output_path, width = 3, height = 3)
+  ggsave("SF_crime.png", plot = SF_crime_map, path = output_path, width = 6, height = 4)
 }
 
 # call main function
