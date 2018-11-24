@@ -1,3 +1,14 @@
+#! /usr/bin/env Rscript
+# Exploratory_SF_map.R
+# Betty Zhou, November 23, 2018
+#
+# This script generates a map of San Francisco with crime density overlayed on top as a png output. This # script takes in a .csv and the output path as the variable arguments.
+#
+# Dependencies: tidyverse, ggmap, maps
+#
+# Usage: Rscript Exploratory_SF_map.R clean_sf_data_100k.csv results/figures/
+
+
 library(tidyverse)
 suppressPackageStartupMessages(library(ggmap))
 suppressPackageStartupMessages(library(maps))
