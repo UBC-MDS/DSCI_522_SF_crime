@@ -8,6 +8,7 @@ Collaborators:
 
 # Project Overview
 
+
 ## Objective  
 The goal of this project is to implement a classification of the San Francisco crime data with a decision tree to predict the resolution of a crime instance. The resolution of a crime instance can be either "processed" or "non-processed". Processed indicates that a crime instance resulted in a subject being processed into the police system.
 
@@ -23,7 +24,6 @@ The dataset can be found at the following link:
 
 The dataset can be loaded using this [R script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.R)
 or this [Python script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.py). The following is a preview of the dataset in R:
-
 
 
 # Objective
@@ -61,21 +61,39 @@ The categorical predictors will be pre-processed using 2 method. The category, d
 
 We will summarize our data by reporting a table of the strongest predictors for whether a crime instance in San Francisco resulted in a processed or non-processed resolution. The summary table will include the top predictors and their feature importance values. Finally, the report will include the validation accuracy of our model.
 
-# Analysis Pipeline. 
+
+# Analysis Pipeline
+
 ## Usage:
 
+- Clone this repo.
+
+- Run the following commands:
+
+```bash
+python src/01_clean_data.py 1000 data/san_francisco_clean.csv
+python src/02_EDA.py data/san_francisco_clean.csv results/figures/
+python src/03_feature_engineering.py data/san_francisco_clean.csv data/san_francisco_features.csv
+python src/04_decison_tree.py data/san_francisco_features.csv data/feature_results.csv
+Rscript src/03_Exploratory_SF_map.R data/san_francisco_clean.csv results/figures/
+Rscript -e "rmarkdown::render('docs/san_francisco_report.Rmd')"
+```
+
+
 ## Dependencies:
-- R $ R libraries
+- R & R libraries
   - `rmarkdown`  
   - `knitr`  
   - `tidyverse`  
   - `ggmap`  
   - `maps`  
 
-- Python & Python libraries:
+- Python 3 & Python libraries:
   - `matplotlib`
   - `numpy`
   - `seaborn`
   - `pandas`
   - `argparse`
+  - `sklearn`
+  - `pendulum`
 
