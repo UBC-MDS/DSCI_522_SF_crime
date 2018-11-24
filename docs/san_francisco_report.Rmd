@@ -43,9 +43,8 @@ Exploratory analysis was performed on the cleaned dataset to better understand t
 
 First, we checked the overall ratio of the resolution classes, which is the target classes for our classifer:
 
-```{r target_check_fig, fig.align='center', message = FALSE, echo=FALSE}
-knitr::include_graphics(here::here("results/figures/target_plot.png"))
-```
+![](../results/figures/target_plot.png)
+
 *Figure 1. An Overall check of the number of examples for each target class in resolution.* 
 
 The bar graph indicates a 2:1 imbalance in our target class between non-processed and processed. We plan to mitigate this imbalance in target classes by setting `class_weight = "balanced"`when building our model with `DecisionTreeClassifier` in scikit-learn. Therefore, we will keep this imbalance in mind for the remaining exploratory analysis where a 2 to 1 difference between non-processed and processed may be due to the class imbalance in the initial dataset and may not be indicative of trends in the dataset.
@@ -53,23 +52,20 @@ The bar graph indicates a 2:1 imbalance in our target class between non-processe
 Next, we investigated all the predictors in the data set in relation to our target class for 100,000 crime instances. The features that were explored include: category, day of week, description, police district, time, longitude, latitude, month of report and day of report, in respect to whether the resolution of the crime instance was processed or non-processed. The features that were demonstrated to be good predictors for segregrating processed from non-processed crime resolutions are shown below.
 
 A map of the density distribution of resolution for San Francisco crime instances was plotted below.
-```{r SF_density_map, fig.align='center', echo=FALSE, message=FALSE}
-knitr::include_graphics(here::here("results/figures/SF_crime.png"))
-```
+![](../results/figures/SF_crime.png)
+
 *Figure 2. Density distribution of the resolution for crime incidents reported in San Francisco. *
 
 The density distribution for non-processed and processed resolved crime instances appear to be segregrated based on longitude and latitude. The non-processed and processed crime instances occurred in locations of close proximity, but the map clearly shows the 2 resolutions to be concentrated at different longitudes and latitudes. Therefore, latitude and longitude may be strong predictors for the resolution of a crime instance in San Francisco. 
 
-```{r category_fig, fig.align='center', echo=FALSE, message=FALSE}
-knitr::include_graphics(here::here("results/figures/category_plot.png"))
-```
+![](../results/figures/category_plot.png)
+
 *Figure 3. Bar graph of category distribution for San Francisco crime instances that resulted in a processed and non-processed resolution. *
 
 If category is not a strong predictor for resolution, then we should see a 2:1 ratio between non-processed and processed for each class in category due to the 2:1 class imbalance in the resolution feature. From the bar graph above, there are many classes within category that do not demonstrate the 2:1 ratio between non-processed and processed, such as larceny/theft, vehicle theft, Drug/narcotic etc. Therefore, these classes within the category feature may be good predictors for whether a crime instance will result in a "processed or non-processed" resolution.
 
-```{r time_fig, fig.align='center', echo=FALSE, message=FALSE}
-knitr::include_graphics(here::here("results/figures/time_plot.png"))
-```
+![](../results/figures/time_plot.png)
+
 *Figure 4. Time distribution for San Francisco crime instances that resulted in a processed and non-processed resolution.*
 
 From the histogram above, there is approximately a 2:1 ratio between non-processed and processed for each interval of time, except from approximated 200 to 300 minutes from midnight (i.e. 3AM to 5 AM). Therefore, this indicates that time may be a good predictor for the resolution of a crime instance in San Francisco.
