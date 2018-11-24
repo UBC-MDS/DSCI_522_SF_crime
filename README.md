@@ -25,8 +25,6 @@ The dataset can be found at the following link:
 The dataset can be loaded using this [R script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.R)
 or this [Python script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.py). The following is a preview of the dataset in R:
 
-![](results/figures/head_raw_data.png)
-
 # Objective
 
 The goal of our project is to implement a classification of the San Francisco crime data with a decision tree. 
