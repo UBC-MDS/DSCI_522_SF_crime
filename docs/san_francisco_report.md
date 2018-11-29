@@ -26,14 +26,14 @@ This project will address the following predictive question: What are the strong
 
 The San Francisco crime dataset used in this projects contains 10 features. A preview of the dataset is shown below:
 
-| category      | dayofweek | descript                             | pddistrict | resolution     |  time|          x|         y|  report\_month|  report\_day|
-|:--------------|:----------|:-------------------------------------|:-----------|:---------------|-----:|----------:|---------:|--------------:|------------:|
-| ASSAULT       | Monday    | THREATS AGAINST LIFE                 | TARAVAL    | non\_processed |   860|  -122.4750|  37.73246|              6|           20|
-| BURGLARY      | Tuesday   | BURGLARY, FORCIBLE ENTRY             | SOUTHERN   | non\_processed |  1260|  -122.3656|  37.80967|             10|           17|
-| NON-CRIMINAL  | Thursday  | COURTESY REPORT                      | NORTHERN   | non\_processed |   720|  -122.4203|  37.78845|              9|            1|
-| LARCENY/THEFT | Tuesday   | GRAND THEFT FROM PERSON              | NORTHERN   | non\_processed |  1072|  -122.4310|  37.78303|             11|           14|
-| VEHICLE THEFT | Saturday  | STOLEN MOTORCYCLE                    | CENTRAL    | non\_processed |    30|  -122.4179|  37.79368|              4|            7|
-| VANDALISM     | Thursday  | MALICIOUS MISCHIEF, BREAKING WINDOWS | CENTRAL    | non\_processed |   120|  -122.3997|  37.79737|              2|           15|
+| category       | dayofweek | descript                       | pddistrict | resolution     |  time|          x|         y|  report\_month|  report\_day|
+|:---------------|:----------|:-------------------------------|:-----------|:---------------|-----:|----------:|---------:|--------------:|------------:|
+| LARCENY/THEFT  | Tuesday   | PETTY THEFT FROM LOCKED AUTO   | NORTHERN   | non\_processed |   375|  -122.4211|  37.78500|              6|           28|
+| ASSAULT        | Monday    | BATTERY                        | INGLESIDE  | processed      |   712|  -122.4216|  37.74300|             10|           10|
+| LARCENY/THEFT  | Monday    | GRAND THEFT FROM UNLOCKED AUTO | CENTRAL    | processed      |  1120|  -122.4180|  37.80269|              7|           18|
+| OTHER OFFENSES | Wednesday | PROBATION VIOLATION            | PARK       | processed      |  1075|  -122.4534|  37.76871|              9|            7|
+| NON-CRIMINAL   | Friday    | CIVIL SIDEWALKS, VIOLATION     | MISSION    | processed      |   738|  -122.4142|  37.75489|              6|           24|
+| OTHER OFFENSES | Wednesday | TRAFFIC VIOLATION              | INGLESIDE  | processed      |  1105|  -122.4418|  37.71543|              8|            3|
 
 *Table 1. Preview of San Francisco crime dataset.*
 
@@ -81,31 +81,37 @@ After fitting the decision tree classifier, we observe that the main features fo
 
 | Feature                   |  Importance|
 |:--------------------------|-----------:|
-| auto                      |      0.1563|
-| property                  |      0.1083|
-| category\_VEHICLE THEFT   |      0.0970|
-| category\_VANDALISM       |      0.0673|
-| category\_BURGLARY        |      0.0611|
-| category\_SUSPICIOUS OCC  |      0.0542|
-| category\_NON-CRIMINAL    |      0.0393|
-| category\_ROBBERY         |      0.0392|
-| stolen                    |      0.0386|
-| x                         |      0.0364|
-| category\_ASSAULT         |      0.0357|
-| building                  |      0.0336|
-| time                      |      0.0327|
-| y                         |      0.0325|
-| category\_STOLEN PROPERTY |      0.0218|
-| vehicle                   |      0.0148|
-| person                    |      0.0140|
+| theft                     |      0.1032|
+| x                         |      0.0816|
+| y                         |      0.0811|
+| time                      |      0.0702|
+| property                  |      0.0676|
+| stolen                    |      0.0534|
+| malicious                 |      0.0532|
+| entry                     |      0.0488|
+| occurrence                |      0.0431|
+| category\_ROBBERY         |      0.0329|
+| category\_STOLEN PROPERTY |      0.0240|
+| dayofweek\_Saturday       |      0.0205|
+| category\_ASSAULT         |      0.0186|
+| report\_day\_14           |      0.0182|
+| adult                     |      0.0180|
+| report\_month\_4          |      0.0178|
+| pddistrict\_SOUTHERN      |      0.0168|
+| pddistrict\_BAYVIEW       |      0.0143|
+| pddistrict\_MISSION       |      0.0130|
+| report\_day\_18           |      0.0126|
+| category\_TRESPASS        |      0.0124|
+| locked                    |      0.0123|
+| report\_day\_29           |      0.0113|
 
 *Table 2. Top features of the decision tree classifier for San Francisco Crime Data. *
 
 If we evaluate the performance of our model we can see that it has an accuracy of around 8 out of 10. This means that for every 10 people we predict, we are going to predict correctly for 8 individuals.
 
-|                  |         |
-|:-----------------|--------:|
-| Testing Accuracy |  80.756%|
+|                  |       |
+|:-----------------|------:|
+| Testing Accuracy |  70.4%|
 
 5.0 Assumptions
 ---------------
