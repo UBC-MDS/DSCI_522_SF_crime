@@ -71,7 +71,11 @@ python src/04_decison_tree.py data/san_francisco_features.csv data/feature_resul
 Rscript src/03_Exploratory_SF_map.R data/san_francisco_clean.csv results/figures/
 Rscript -e "rmarkdown::render('docs/san_francisco_report.Rmd')"
 ```
+Or, run all scripts using the following command:
 
+```bash
+make all
+```
 
 ## Dependencies:
 - R & R libraries
