@@ -13,8 +13,11 @@
 #
 # Dependencies: pandas, numpy, argparse, pendulum
 #
-# Usage: python 01_clean_data.py "300000" "data/san_francisco_clean.csv"
-
+# Usage:
+# python 01_clean_data.py <integer> <output file>
+# <integer> is a integer specifying the number of examples to extract.
+# <output file> is the name of the output csv.
+# Example: python 01_clean_data.py "300000" "data/san_francisco_clean.csv"
 
 # In[10]:
 
@@ -78,7 +81,7 @@ days = []
 for date in sf_dates:
     months.append(date.month)
     days.append(date.day)
-    
+
 sf_data['report_month'] = months
 sf_data['report_day'] = days
 
@@ -86,7 +89,7 @@ sf_data['report_day'] = days
 # In[5]:
 
 
-# Extracting time as minutes from midnight to have a continous feature. 
+# Extracting time as minutes from midnight to have a continous feature.
 
 sf_times = parse_dates(sf_data.time)
 
@@ -97,9 +100,9 @@ for time in sf_times:
 
 sf_data['time'] = times
 
-sf_data = sf_data[['category', 'dayofweek', 
+sf_data = sf_data[['category', 'dayofweek',
          'descript','pddistrict',
-         'resolution', 'time', 
+         'resolution', 'time',
          'x', 'y', 'report_month', 'report_day']]
 
 
@@ -108,13 +111,13 @@ sf_data = sf_data[['category', 'dayofweek',
 
 # Recoding our labels
 
-sf_data = sf_data.replace({'resolution': 
+sf_data = sf_data.replace({'resolution':
                  ['NONE', 'CLEARED-CONTACT JUVENILE FOR MORE INFO',
-                  'UNFOUNDED', 'JUVENILE ADMONISHED','EXCEPTIONAL CLEARANCE', 
+                  'UNFOUNDED', 'JUVENILE ADMONISHED','EXCEPTIONAL CLEARANCE',
                   'JUVENILE DIVERTED']}, 'non_processed')
 
-sf_data = sf_data.replace({'resolution': 
-                 ['ARREST, BOOKED', 'ARREST, CITED', 'NOT PROSECUTED', 
+sf_data = sf_data.replace({'resolution':
+                 ['ARREST, BOOKED', 'ARREST, CITED', 'NOT PROSECUTED',
                   'PSYCHOPATHIC CASE', 'JUVENILE CITED', 'JUVENILE BOOKED', 'LOCATED',
                   'PROSECUTED BY OUTSIDE AGENCY', 'COMPLAINANT REFUSES TO PROSECUTE',
                   'DISTRICT ATTORNEY REFUSES TO PROSECUTE', 'PROSECUTED FOR LESSER OFFENSE']}, 'processed')
@@ -124,4 +127,3 @@ sf_data = sf_data.replace({'resolution':
 
 
 sf_data.to_csv(out_file, index_label=False, index=False)
-

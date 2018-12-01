@@ -13,7 +13,7 @@ all : data/san_francisco_clean.csv results/figures/ results/figures/SF_crime.png
 
 # downloads data from the SF portal API, cleans it, and saves it as a CSV file.
 data/san_francisco_clean.csv : src/01_clean_data.py
-	python src/01_clean_data.py 1000 data/san_francisco_clean.csv
+	python src/01_clean_data.py 100000 data/san_francisco_clean.csv
 
 # generates exploratory data analysis figures
 results/figures/ : src/02_EDA.py data/san_francisco_clean.csv

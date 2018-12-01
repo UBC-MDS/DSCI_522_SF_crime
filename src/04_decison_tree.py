@@ -13,7 +13,11 @@
 #
 # Dependencies: pandas, sklearn, argparse, numpy
 #
-# Usage: python 04_clean_data.py "data/san_francisco_features.csv" "data/feature_results.csv"
+# Usage:
+# python 04_clean_data.py <input file> <output file>
+# <input file> is the input csv.
+# <output file> is the file name of the output csv.
+# python 04_clean_data.py "data/san_francisco_features.csv" "data/feature_results.csv"
 
 
 # In[5]:
@@ -116,8 +120,8 @@ feature_results = feature_results.query('feature_importance > 0.01')
 # In[27]:
 
 
-feature_results = pd.concat([pd.DataFrame({'features':['TEST_ACCURACY'], 
-                        'feature_importance' : [accuracy]}), 
+feature_results = pd.concat([pd.DataFrame({'features':['TEST_ACCURACY'],
+                        'feature_importance' : [accuracy]}),
           feature_results])
 
 
@@ -125,4 +129,3 @@ feature_results = pd.concat([pd.DataFrame({'features':['TEST_ACCURACY'],
 
 
 feature_results.to_csv(output_file)
-

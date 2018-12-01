@@ -13,7 +13,11 @@
 #
 # Dependencies: pandas, sklearn, argparse
 #
-# Usage: python 03_clean_data.py "data/san_francisco_clean.csv" "data/san_francisco_features.csv"
+# Usage:
+# python 03_clean_data.py <input file> <output file>
+# <input file> is the input csv.
+# <output file> is the name of the output csv
+# python 03_clean_data.py "data/san_francisco_clean.csv" "data/san_francisco_features.csv"
 
 
 # In[11]:
@@ -90,4 +94,3 @@ sf_data = sf_data.drop('descript', axis=1)
 
 
 sf_data.to_csv(output_file, index_label=False, index=False)
-
