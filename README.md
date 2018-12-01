@@ -24,7 +24,7 @@ The dataset can be found at the following link:
 The dataset can be loaded using this [R script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.R)
 or this [Python script](https://github.com/UBC-MDS/DSCI_522_SF_crime/blob/master/src/01_load-data.py). The following is a preview of the dataset in R:
 
-![](https://github.com/bettybhzhou/DSCI_522_SF_crime/blob/master/results/figures/head_raw_data.png)
+![](https://github.com/bettybhzhou/DSCI_522_SF_crime/blob/master/data/imgs/Raw_data_preview.png)
 
 # Analysis and Results
 The final report of the project can be found [here](https://github.com/bettybhzhou/DSCI_522_SF_crime/blob/master/docs/san_francisco_report.md)
