@@ -146,7 +146,7 @@ The resolution target response variable initially had 17 classes in the orginal 
 |                                        | DISTRICT ATTORNEY REFUSES TO PROSECUTE |
 |                                        | PROSECUTED FOR LESSER OFFENSE          |
 
-*Table 5. Recoding of Resolution target response variable.*
+***Table 5. Recoding of Resolution target response variable.***
 
 7.0 Limitations and Future Directions
 -------------------------------------
