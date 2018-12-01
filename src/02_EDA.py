@@ -8,13 +8,17 @@
 # EDA.py
 # Betty Zhou, November 23, 2018
 #
-# This script generates exploratory data analysis figures such as bar graphs for 
-# categorical variables and histograms for continuous variables. This script takes 
-# a clean .csv file and an output file path as the variable arguments. 
+# This script generates exploratory data analysis figures such as bar graphs for
+# categorical variables and histograms for continuous variables. This script takes
+# a clean .csv file and an output file path as the variable arguments.
 #
 # Dependencies: argparse, pandas, numpy, seaborn, matplotlib
 #
-# Usage: python EDA.py "clean_sf_data.csv" "results/figures/"
+# Usage:
+# python EDA.py <input file> <output path>
+# <input file> is the input CSV.
+# <output path> is the path for which the png will be written to.
+# Example: python EDA.py "clean_sf_data.csv" "results/figures/"
 
 import argparse
 import pandas as pd
@@ -33,18 +37,18 @@ parser.add_argument('output_file')
 args = parser.parse_args()
 
 def main():
-    
+
     #read input file
     sf_data = pd.read_csv(args.input_file)
-    
+
     # Checking imbalances in target classes
     sns.countplot(data=sf_data, x='resolution')
     plt.savefig(args.output_file + str('target') + "_plot.png")
     plt.close()
-    
+
     # Create plot for categorical features
     X_features = {'category': 'Category',
-                  'pddistrict': 'Police District', 
+                  'pddistrict': 'Police District',
                   'dayofweek' : "Day of week",
                   'report_month' : 'Month of Incident Report',
                   'report_day' : 'Day of Incident Report'}
@@ -54,7 +58,7 @@ def main():
         plt.tight_layout()
         plt.savefig(args.output_file + str(i) + "_plot.png")
         plt.close()
-    
+
     # Histogram for longitude
     plot_his_bins(sf_data, 'x', 'longitude', 200)
     # Histogram for latitude
@@ -86,4 +90,3 @@ def plot_his_bins(sf_data, feature, xlabel, binsize):
 
 if __name__ == "__main__":
     main()
-

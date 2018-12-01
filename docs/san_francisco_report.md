@@ -5,10 +5,11 @@ Authors: Ian Flores Siaca & Betty Zhou
 -   [1.0 Introduction](#introduction)
 -   [2.0 Dataset](#dataset)
 -   [3.0 Exploratory Data Analysis](#exploratory-data-analysis)
--   [4.0 Analysis & Results](#analysis-results)
--   [5.0 Assumptions](#assumptions)
--   [6.0 Limitations and Future Directions](#limitations-and-future-directions)
--   [7.0 References](#references)
+-   [4.0 Analysis Workflow](#analysis-workflow)
+-   [5.0 Analysis & Results](#analysis-results)
+-   [6.0 Assumptions](#assumptions)
+-   [7.0 Limitations and Future Directions](#limitations-and-future-directions)
+-   [8.0 References](#references)
 
 1.0 Introduction
 ----------------
@@ -35,7 +36,7 @@ The San Francisco crime dataset used in this projects contains 10 features. A pr
 | VEHICLE THEFT | Saturday  | STOLEN MOTORCYCLE                    | CENTRAL    | non\_processed |    30|  -122.4179|  37.79368|              4|            7|
 | VANDALISM     | Thursday  | MALICIOUS MISCHIEF, BREAKING WINDOWS | CENTRAL    | non\_processed |   120|  -122.3997|  37.79737|              2|           15|
 
-*Table 1. Preview of San Francisco crime dataset.*
+***Table 1. Preview of San Francisco crime dataset.***
 
 3.0 Exploratory Data Analysis
 -----------------------------
@@ -46,7 +47,7 @@ First, we checked the overall ratio of the resolution classes, which is the targ
 
 ![](../results/figures/target_plot.png)
 
-*Figure 1. An Overall check of the number of examples for each target class in resolution.*
+***Figure 1. An Overall check of the number of examples for each target class in resolution.***
 
 The bar graph indicates a 2:1 imbalance in our target class between non-processed and processed. We plan to mitigate this imbalance in target classes by setting `class_weight = "balanced"`when building our model with `DecisionTreeClassifier` in scikit-learn. Therefore, we will keep this imbalance in mind for the remaining exploratory analysis where a 2 to 1 difference between non-processed and processed may be due to the class imbalance in the initial dataset and may not be indicative of trends in the dataset.
 
@@ -54,25 +55,62 @@ Next, we investigated all the predictors in the data set in relation to our targ
 
 A map of the density distribution of resolution for San Francisco crime instances was plotted below. ![](../results/figures/SF_crime.png)
 
-*Figure 2. Density distribution of the resolution for crime incidents reported in San Francisco. *
+***Figure 2. Density distribution of the resolution for crime incidents reported in San Francisco.*** Lines that are closer together on the density map indicate higher density.
 
 The density distribution for non-processed and processed resolved crime instances appear to be segregrated based on longitude and latitude. The non-processed and processed crime instances occurred in locations of close proximity, but the map clearly shows the 2 resolutions to be concentrated at different longitudes and latitudes. Therefore, latitude and longitude may be strong predictors for the resolution of a crime instance in San Francisco.
 
 ![](../results/figures/category_plot.png)
 
-*Figure 3. Bar graph of category distribution for San Francisco crime instances that resulted in a processed and non-processed resolution. *
+***Figure 3. Bar graph of category distribution for San Francisco crime instances that resulted in a processed and non-processed resolution.***
 
 If category is not a strong predictor for resolution, then we should see a 2:1 ratio between non-processed and processed for each class in category due to the 2:1 class imbalance in the resolution feature. From the bar graph above, there are many classes within category that do not demonstrate the 2:1 ratio between non-processed and processed, such as larceny/theft, vehicle theft, Drug/narcotic etc. Therefore, these classes within the category feature may be good predictors for whether a crime instance will result in a "processed or non-processed" resolution.
 
 ![](../results/figures/time_plot.png)
 
-*Figure 4. Time distribution for San Francisco crime instances that resulted in a processed and non-processed resolution.*
+***Figure 4. Time distribution for San Francisco crime instances that resulted in a processed and non-processed resolution.***
 
 From the histogram above, there is approximately a 2:1 ratio between non-processed and processed for each interval of time, except from approximated 200 to 300 minutes from midnight (i.e. 3AM to 5 AM). Therefore, this indicates that time may be a good predictor for the resolution of a crime instance in San Francisco.
 
 ------------------------------------------------------------------------
 
-4.0 Analysis & Results
+4.0 Analysis Workflow
+---------------------
+
+1.  Since our dataset is very skewed towards one of the classes, we recoded our target response variables from 17 classes to 2 classes to obtain a 2:1 imbalance in our final target classes. The final target response variables were "processed" and "non-processed".
+
+2.  The following table outlines the features that were used as predictors to build the classifier:
+
+| Feature         | Feature Type |
+|-----------------|--------------|
+| Category        | Categorical  |
+| Description     | Categorical  |
+| Day of week     | Categorical  |
+| Time            | Continuous   |
+| Police District | Categorical  |
+| Longitude       | Continuous   |
+| Latitude        | Continuous   |
+
+***Table 2. Features used to build the decision tree classifier***
+
+The categorical predictors were pre-processed using 2 method. The category, day of week and police district predictors were converted into dummy variables using `pandas.get_dummies`. The description predictor were pre-processed using `sklearn.feature_extraction.text.CountVectorizer` to extract the 50 most common descriptions, which were used as predictors to build the classifier.
+
+|            |          |           |         |          |            |            |          |           |           |
+|:-----------|:---------|:----------|:--------|:---------|:-----------|:-----------|:---------|:----------|:----------|
+| aggravated | aided    | arrest    | assault | auto     | automobile | base       | battery  | building  | burglary  |
+| case       | cocaine  | disturbed | drivers | enroute  | entry      | forcible   | grand    | license   | life      |
+| locked     | lost     | malicious | mental  | mischief | missing    | occurrence | outside  | person    | petty     |
+| possession | property | recovered | revoked | robbery  | rock       | sale       | stolen   | street    | suspended |
+| suspicious | theft    | threats   | traffic | unlawful | vandalism  | vehicle    | vehicles | violation | warrant   |
+
+***Table 3. The 50 most common words extracted from the decription feature.***
+
+1.  We will randomly split our dataset into training and validation sets at a 50:50 ratio using `sklearn.model_selection.train_test_split`.
+
+2.  `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max\_depth between a k of 1 and 30. The optimal max\_depth was used to build the final model. Finally, the accuracy of the model was tested on the validation set.
+
+3.  The Scikit learn `feature_importances_` attribute returned the Gini importance of each feature and was used to determine the strongest predictors for the target classes. The strongest predictors are the predictors with the highest feature\_importance.
+
+5.0 Analysis & Results
 ----------------------
 
 After fitting the decision tree classifier, we observe that the main features for predicting whether a person will be processed or not by the justice system in San Francisco, are the description, the crime category, the time and the location. To calculate this importance we are using the Gini importance.
@@ -81,33 +119,32 @@ After fitting the decision tree classifier, we observe that the main features fo
 
 | Feature                   |  Importance|
 |:--------------------------|-----------:|
-| auto                      |      0.1563|
-| property                  |      0.1083|
-| category\_VEHICLE THEFT   |      0.0970|
-| category\_VANDALISM       |      0.0673|
-| category\_BURGLARY        |      0.0611|
-| category\_SUSPICIOUS OCC  |      0.0542|
-| category\_NON-CRIMINAL    |      0.0393|
-| category\_ROBBERY         |      0.0392|
-| stolen                    |      0.0386|
-| x                         |      0.0364|
-| category\_ASSAULT         |      0.0357|
-| building                  |      0.0336|
-| time                      |      0.0327|
-| y                         |      0.0325|
-| category\_STOLEN PROPERTY |      0.0218|
-| vehicle                   |      0.0148|
-| person                    |      0.0140|
+| auto                      |      0.1604|
+| property                  |      0.1086|
+| category\_VEHICLE THEFT   |      0.0978|
+| malicious                 |      0.0684|
+| category\_BURGLARY        |      0.0627|
+| category\_SUSPICIOUS OCC  |      0.0565|
+| category\_NON-CRIMINAL    |      0.0385|
+| category\_ASSAULT         |      0.0356|
+| building                  |      0.0345|
+| category\_ROBBERY         |      0.0343|
+| stolen                    |      0.0343|
+| time                      |      0.0326|
+| y                         |      0.0304|
+| x                         |      0.0297|
+| category\_STOLEN PROPERTY |      0.0240|
+| category\_LARCENY/THEFT   |      0.0152|
 
-*Table 2. Top features of the decision tree classifier for San Francisco Crime Data. *
+***Table 4. Top features of the decision tree classifier for San Francisco Crime Data. ***
 
 If we evaluate the performance of our model we can see that it has an accuracy of around 8 out of 10. This means that for every 10 people we predict, we are going to predict correctly for 8 individuals.
 
 |                  |         |
 |:-----------------|--------:|
-| Testing Accuracy |  80.756%|
+| Testing Accuracy |  81.082%|
 
-5.0 Assumptions
+6.0 Assumptions
 ---------------
 
 The resolution target response variable initially had 17 classes in the orginal raw dataset. We recoded resolution into "processed" and "non-processed" based on the description provided by the [San Francisco Police Department](https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry). The recoding of the resolution target response could be different based on the interpretation of the descriptions provided by the police department. The resolution variable was recoded as demonstrated in the table below:
@@ -126,16 +163,18 @@ The resolution target response variable initially had 17 classes in the orginal 
 |                                        | DISTRICT ATTORNEY REFUSES TO PROSECUTE |
 |                                        | PROSECUTED FOR LESSER OFFENSE          |
 
-*Table 3. Recoding of Resolution target response variable.*
+*Table 5. Recoding of Resolution target response variable.*
 
-6.0 Limitations and Future Directions
+7.0 Limitations and Future Directions
 -------------------------------------
 
 Due to the time constraint of this project, we randomly subset 100,000 crime instances from the 2 million San Francisco crime dataset to train and validate our model. We also limited the analysis to include only the top 50 most frequent words in the description feature. This could have eliminated rare words that could have been good predictors in classifying the resolution of a crime instance in San Francisco.
 
 Therefore, in order to improve our analysis, we would build our classifier on all 2 million San Francisco crime instances and look at addition classes within the description feature to better generalize our model and increase the validation score. We could also pool additional features related to crime instances, such as income information or employment rate, to determine whether there are other predictors, not in the current San Francisco dataset, that may be strong predictors for the resolution of a crime instance.
 
-7.0 References
+In addition, since our features are mostly categorical, it would be interesting to compare our current decision tree classifier to a naive Bayes classifier.
+
+8.0 References
 --------------
 
 [Data](https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry)
