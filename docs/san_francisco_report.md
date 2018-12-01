@@ -106,7 +106,7 @@ The categorical predictors were pre-processed using 2 method. The category, day 
 
 1.  We will randomly split our dataset into training and validation sets at a 50:50 ratio using `sklearn.model_selection.train_test_split`.
 
-2.  `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max\_depth between a k of 1 and 30. The optimal max\_depth was used to build the final model. Finally, the accuracy of the model was tested on the validation set.
+2.  `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max\_depth between a k of 1 and 30. The optimal max\_depth was used to build the final model. Finally, the accuracy of the model was tested on the validation set using sklearn score's method.
 
 3.  The Scikit learn `feature_importances_` attribute returned the Gini importance of each feature and was used to determine the strongest predictors for the target classes. The strongest predictors are the predictors with the highest feature\_importance.
 
@@ -117,24 +117,7 @@ After fitting the decision tree classifier, we observe that the main features fo
 
 #### Top Features
 
-| Feature                   |  Importance|
-|:--------------------------|-----------:|
-| auto                      |      0.1604|
-| property                  |      0.1086|
-| category\_VEHICLE THEFT   |      0.0978|
-| malicious                 |      0.0684|
-| category\_BURGLARY        |      0.0627|
-| category\_SUSPICIOUS OCC  |      0.0565|
-| category\_NON-CRIMINAL    |      0.0385|
-| category\_ASSAULT         |      0.0356|
-| building                  |      0.0345|
-| category\_ROBBERY         |      0.0343|
-| stolen                    |      0.0343|
-| time                      |      0.0326|
-| y                         |      0.0304|
-| x                         |      0.0297|
-| category\_STOLEN PROPERTY |      0.0240|
-| category\_LARCENY/THEFT   |      0.0152|
+![](san_francisco_report_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ***Table 4. Top features of the decision tree classifier for San Francisco Crime Data. ***
 
@@ -172,7 +155,7 @@ Due to the time constraint of this project, we randomly subset 100,000 crime ins
 
 Therefore, in order to improve our analysis, we would build our classifier on all 2 million San Francisco crime instances and look at addition classes within the description feature to better generalize our model and increase the validation score. We could also pool additional features related to crime instances, such as income information or employment rate, to determine whether there are other predictors, not in the current San Francisco dataset, that may be strong predictors for the resolution of a crime instance.
 
-In addition, since our features are mostly categorical, it would be interesting to compare our current decision tree classifier to a naive Bayes classifier.
+In addition, since our features are mostly categorical, it would be interesting to compare our current decision tree classifier to a naive Bernoulli Bayes classifier.
 
 8.0 References
 --------------

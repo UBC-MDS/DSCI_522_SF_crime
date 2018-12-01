@@ -104,7 +104,7 @@ __*Table 3. The 50 most common words extracted from the decription feature.*__
 
 3. We will randomly split our dataset into training and validation sets at a 50:50 ratio using `sklearn.model_selection.train_test_split`.
 
-3. `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max_depth between a k of 1 and 30. The optimal max_depth was used to build the final model. Finally, the accuracy of the model was tested on the validation set.
+3. `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max_depth between a k of 1 and 30. The optimal max_depth was used to build the final model. Finally, the accuracy of the model was tested on the validation set using sklearn score's method.
 
 4. The Scikit learn `feature_importances_` attribute returned the Gini importance of each feature and was used to determine the strongest predictors for the target classes. The strongest predictors are the predictors with the highest feature_importance.
 
@@ -113,7 +113,7 @@ __*Table 3. The 50 most common words extracted from the decription feature.*__
 After fitting the decision tree classifier, we observe that the main features for predicting whether a person will be processed or not by the justice system in San Francisco, are the description, the crime category, the time and the location. To calculate this importance we are using the Gini importance. 
 
 ```{r}
-features <- read.csv('../data/feature_results.csv')
+features <- read.csv(here::here('data/feature_results.csv'))
 features$X <- NULL
 features <- features[order(features$feature_importance, decreasing = TRUE), ]
 model_accuracy <- features[features$features == 'TEST_ACCURACY', "feature_importance"]
@@ -123,7 +123,16 @@ features <- features[features$features != 'TEST_ACCURACY', ]
 #### Top Features
 
 ```{r}
-knitr::kable(features, digits = 4, row.names = FALSE, col.names = c('Feature', 'Importance'))
+library(ggplot2)
+library(forcats)
+ggplot(features, aes(x = fct_reorder(features, feature_importance), 
+                     y = feature_importance)) + 
+    geom_bar(stat = 'identity') +
+    coord_flip() + 
+    xlab('Feature') + 
+    ylab('Feature Importance') +
+    labs(caption = 'Note: Words that appear alone as features indicate the presence or absence of it in the description.') +
+    theme_bw()
 ```
 
 __*Table 4. Top features of the decision tree classifier for San Francisco Crime Data. *__
@@ -160,7 +169,7 @@ Due to the time constraint of this project, we randomly subset 100,000 crime ins
 
 Therefore, in order to improve our analysis, we would build our classifier on all 2 million San Francisco crime instances and look at addition classes within the description feature to better generalize our model and increase the validation score. We could also pool additional features related to crime instances, such as income information or employment rate, to determine whether there are other predictors, not in the current San Francisco dataset, that may be strong predictors for the resolution of a crime instance.
 
-In addition, since our features are mostly categorical, it would be interesting to compare our current decision tree classifier to a naive Bayes classifier.
+In addition, since our features are mostly categorical, it would be interesting to compare our current decision tree classifier to a naive Bernoulli Bayes classifier.
 
 ## 8.0 References
 
