@@ -80,35 +80,35 @@ From the histogram above, there is approximately a 2:1 ratio between non-process
 
 2.  The following table outlines the features that were used as predictors to build the classifier:
 
-| Feature         | Feature Type |
-|-----------------|--------------|
-| Category        | Categorical  |
-| Description     | Categorical  |
-| Day of week     | Categorical  |
-| Time            | Continuous   |
-| Police District | Categorical  |
-| Longitude       | Continuous   |
-| Latitude        | Continuous   |
+    | Feature         | Feature Type |
+    |-----------------|--------------|
+    | Category        | Categorical  |
+    | Description     | Categorical  |
+    | Day of week     | Categorical  |
+    | Time            | Continuous   |
+    | Police District | Categorical  |
+    | Longitude       | Continuous   |
+    | Latitude        | Continuous   |
 
-***Table 2. Features used to build the decision tree classifier***
+    ***Table 2. Features used to build the decision tree classifier***
 
-The categorical predictors were pre-processed using 2 method. The category, day of week and police district predictors were converted into dummy variables using `pandas.get_dummies`. The description predictor were pre-processed using `sklearn.feature_extraction.text.CountVectorizer` to extract the 50 most common descriptions, which were used as predictors to build the classifier.
+    The categorical predictors were pre-processed using 2 method. The category, day of week and police district predictors were converted into dummy variables using `pandas.get_dummies`. The description predictor were pre-processed using `sklearn.feature_extraction.text.CountVectorizer` to extract the 50 most common descriptions, which were used as predictors to build the classifier.
 
-|            |          |           |         |          |            |            |          |           |           |
-|:-----------|:---------|:----------|:--------|:---------|:-----------|:-----------|:---------|:----------|:----------|
-| aggravated | aided    | arrest    | assault | auto     | automobile | base       | battery  | building  | burglary  |
-| case       | cocaine  | disturbed | drivers | enroute  | entry      | forcible   | grand    | license   | life      |
-| locked     | lost     | malicious | mental  | mischief | missing    | occurrence | outside  | person    | petty     |
-| possession | property | recovered | revoked | robbery  | rock       | sale       | stolen   | street    | suspended |
-| suspicious | theft    | threats   | traffic | unlawful | vandalism  | vehicle    | vehicles | violation | warrant   |
+    |            |          |           |         |          |            |            |          |           |           |
+    |:-----------|:---------|:----------|:--------|:---------|:-----------|:-----------|:---------|:----------|:----------|
+    | aggravated | aided    | arrest    | assault | auto     | automobile | base       | battery  | building  | burglary  |
+    | case       | cocaine  | disturbed | drivers | enroute  | entry      | forcible   | grand    | license   | life      |
+    | locked     | lost     | malicious | mental  | mischief | missing    | occurrence | outside  | person    | petty     |
+    | possession | property | recovered | revoked | robbery  | rock       | sale       | stolen   | street    | suspended |
+    | suspicious | theft    | threats   | traffic | unlawful | vandalism  | vehicle    | vehicles | violation | warrant   |
 
-***Table 3. The 50 most common words extracted from the decription feature.***
+    ***Table 3. The 50 most common words extracted from the decription feature.***
 
-1.  We will randomly split our dataset into training and validation sets at a 50:50 ratio using `sklearn.model_selection.train_test_split`.
+3.  We will randomly split our dataset into training and validation sets at a 50:50 ratio using `sklearn.model_selection.train_test_split`.
 
-2.  `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max\_depth between a k of 1 and 30. The optimal max\_depth was used to build the final model. Finally, the accuracy of the model was tested on the validation set using sklearn score's method.
+4.  `sklearn.tree.DecisionTreeClassifier` was used to train the model. To combat the imbalance in our target classes, we used the argument `class_weight = 'balanced` within the DecisionTreeClassifier. We used a 3-fold cross-validation on our training set to find the optimal max\_depth between a k of 1 and 30. The optimal max\_depth was used to build the final model. `GridSearch` was used to automatically find the optimal max\_depth and k, which was used in training our model. Finally, the accuracy of the model was tested on the validation set using sklearn score's method.
 
-3.  The Scikit learn `feature_importances_` attribute returned the Gini importance of each feature and was used to determine the strongest predictors for the target classes. The strongest predictors are the predictors with the highest feature\_importance.
+5.  The Scikit learn `feature_importances_` attribute returned the Gini importance of each feature and was used to determine the strongest predictors for the target classes. The strongest predictors are the predictors with the highest feature\_importance.
 
 5.0 Analysis & Results
 ----------------------
@@ -146,7 +146,7 @@ The resolution target response variable initially had 17 classes in the orginal 
 |                                        | DISTRICT ATTORNEY REFUSES TO PROSECUTE |
 |                                        | PROSECUTED FOR LESSER OFFENSE          |
 
-*Table 5. Recoding of Resolution target response variable.*
+***Table 5. Recoding of Resolution target response variable.***
 
 7.0 Limitations and Future Directions
 -------------------------------------
