@@ -9,7 +9,7 @@
 # To clean all outputs: make clean
 
 # run all scripts
-all : data/san_francisco_clean.csv results/figures/ results/figures/SF_crime.png data/san_francisco_features.csv data/feature_results.csv docs/san_francisco_report.md
+all : docs/san_francisco_report.md
 
 # downloads data from the SF portal API, cleans it, and saves it as a CSV file.
 data/san_francisco_clean.csv : src/01_clean_data.py
