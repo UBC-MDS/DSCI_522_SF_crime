@@ -47,9 +47,9 @@ The final report of the project can be found [here](https://github.com/bettybhzh
 
 ## Usage:
 
-1. Clone this repo.
+1. Clone this repository
 
-2. Run the following commands:
+2. From the root of the project, run the following commands:
 
 ```bash
 python src/01_clean_data.py 1000 data/san_francisco_clean.csv
@@ -59,12 +59,30 @@ python src/04_decison_tree.py data/san_francisco_features.csv data/feature_resul
 Rscript src/03_Exploratory_SF_map.R data/san_francisco_clean.csv results/figures/
 Rscript -e "rmarkdown::render('docs/san_francisco_report.Rmd')"
 ```
-Or, run all scripts using the following command:
+Or, run all scripts from the root using the following command:
 
 ```bash
 make all
 ```
 
+To run this analysis using Docker, execute the following steps:
+
+1. Clone this repository
+2. Pull the Docker image from Docker Hub using the follwing command:
+   ```
+   docker pull bettybhz/san_francisco_crime_resolution_model
+   ```
+2. Navigate to the root of this project on your computer using the command line.
+3. Execute the following command by filling in <PATH_ON_YOUR_COMPUTER> with the absolute path to the root of this project on your computer).
+
+    ```
+    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' all
+    ```
+    Execute the following command to clean up the analysis:
+    
+    ```
+    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' clean
+    
 ## Dependencies:
 - R v1.1.456 & R libraries
   - `rmarkdown` v1.10  
