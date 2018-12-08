@@ -10,7 +10,7 @@ editor_options:
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.width = 6, fig.height = 6)
+knitr::opts_chunk$set(echo = FALSE, fig.width = 6, fig.height = 4)
 ```
 
 ## 1.0 Introduction
@@ -43,7 +43,7 @@ Exploratory analysis was performed on the cleaned dataset to better understand t
 
 First, we checked the overall ratio of the resolution classes, which is the target classes for our classifer:
 
-![](../results/figures/target_plot.png)
+<img src="../results/figures/target_plot.png" width="50%">
 
 __*Figure 1. An Overall check of the number of examples for each target class in resolution.*__ 
 
@@ -52,19 +52,19 @@ The bar graph indicates a 2:1 imbalance in our target class between non-processe
 Next, we investigated all the predictors in the data set in relation to our target class for 100,000 crime instances. The features that were explored include: category, day of week, description, police district, time, longitude, latitude, month of report and day of report, in respect to whether the resolution of the crime instance was processed or non-processed. The features that were demonstrated to be good predictors for segregrating processed from non-processed crime resolutions are shown below.
 
 A map of the density distribution of resolution for San Francisco crime instances was plotted below.
-![](../results/figures/SF_crime.png)
+<img src="../results/figures/SF_crime.png" width="75%">
 
 __*Figure 2. Density distribution of the resolution for crime incidents reported in San Francisco.*__ Lines that are closer together on the density map indicate higher density.
 
 The density distribution for non-processed and processed resolved crime instances appear to be segregrated based on longitude and latitude. The non-processed and processed crime instances occurred in locations of close proximity, but the map clearly shows the 2 resolutions to be concentrated at different longitudes and latitudes. Therefore, latitude and longitude may be strong predictors for the resolution of a crime instance in San Francisco. 
 
-![](../results/figures/category_plot.png)
+<img src="../results/figures/category_plot.png" width="75%">
 
 __*Figure 3. Bar graph of category distribution for San Francisco crime instances that resulted in a processed and non-processed resolution.*__
 
 If category is not a strong predictor for resolution, then we should see a 2:1 ratio between non-processed and processed for each class in category due to the 2:1 class imbalance in the resolution feature. From the bar graph above, there are many classes within category that do not demonstrate the 2:1 ratio between non-processed and processed, such as larceny/theft, vehicle theft, Drug/narcotic etc. Therefore, these classes within the category feature may be good predictors for whether a crime instance will result in a "processed or non-processed" resolution.
 
-![](../results/figures/time_plot.png)
+<img src="../results/figures/time_plot.png" width="75%">
 
 __*Figure 4. Time distribution for San Francisco crime instances that resulted in a processed and non-processed resolution.*__
 
