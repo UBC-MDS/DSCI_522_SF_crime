@@ -87,8 +87,8 @@ From the histogram above, there is approximately a 2:1 ratio between non-process
     | Day of week     | Categorical  |
     | Time            | Continuous   |
     | Police District | Categorical  |
-    | Longitude       | Continuous   |
-    | Latitude        | Continuous   |
+    | Longitude (x)      | Continuous   |
+    | Latitude (y)      | Continuous   |
 
     ***Table 2. Features used to build the decision tree classifier***
 
