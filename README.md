@@ -9,7 +9,21 @@ Collaborators:
 # Project Overview
 
 ## Objective  
-The goal of this project is to implement a classification of the San Francisco crime data with a decision tree to predict the resolution of a crime instance. The resolution of a crime instance can be either "processed" or "non-processed". Processed indicates that a crime instance resulted in a subject being processed into the justice system.
+The goal of this project is to implement a classification of the San Francisco crime data with a decision tree to predict the resolution of a crime instance. The resolution of a crime instance can be either "processed" or "non-processed". Processed indicates that a crime instance resulted in a subject being processed into the justice system. The following table outlines crime resolutions that were classified as processed or non-processed:
+
+| Non-Processed                          | Processed                              |
+|----------------------------------------|----------------------------------------|
+| NONE                                   | ARREST, BOOKED                         |
+| CLEARED-CONTACT JUVENILE FOR MORE INFO | ARREST, CITED                          |
+| UNFOUNDED                              | NOT PROSECUTED                         |
+| JUVENILE ADMONISHED                    | PSYCHOPATHIC CASE                      |
+| EXCEPTIONAL CLEARANCE                  | JUVENILE CITED                         |
+| JUVENILE DIVERTED                      | JUVENILE BOOKED                        |
+|                                        | LOCATED                                |
+|                                        | PROSECUTED BY OUTSIDE AGENCY           |
+|                                        | COMPLAINANT REFUSES TO PROSECUTE       |
+|                                        | DISTRICT ATTORNEY REFUSES TO PROSECUTE |
+|                                        | PROSECUTED FOR LESSER OFFENSE          |
 
 This project will address the following predictive question:  
 What are the strongest predictors for whether a crime instance in San Francisco resulted in someone being "processed" or "not processed" into the justice system?
@@ -52,7 +66,7 @@ make all
 ```
 
 ## Dependencies:
-- R & R libraries
+- R v1.1.456 & R libraries
   - `rmarkdown` v1.10  
   - `knitr` v1.20  
   - `tidyverse`v 1.2.1  
