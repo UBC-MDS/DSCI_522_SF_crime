@@ -9,7 +9,21 @@ Collaborators:
 # Project Overview
 
 ## Objective  
-The goal of this project is to implement a classification of the San Francisco crime data with a decision tree to predict the resolution of a crime instance. The resolution of a crime instance can be either "processed" or "non-processed". Processed indicates that a crime instance resulted in a subject being processed into the justice system.
+The goal of this project is to implement a classification of the San Francisco crime data with a decision tree to predict the resolution of a crime instance. The resolution of a crime instance can be either "processed" or "non-processed". Processed indicates that a crime instance resulted in a subject being processed into the justice system. The following table outlines crime resolutions that were classified as processed or non-processed:
+
+| Non-Processed                          | Processed                              |
+|----------------------------------------|----------------------------------------|
+| NONE                                   | ARREST, BOOKED                         |
+| CLEARED-CONTACT JUVENILE FOR MORE INFO | ARREST, CITED                          |
+| UNFOUNDED                              | NOT PROSECUTED                         |
+| JUVENILE ADMONISHED                    | PSYCHOPATHIC CASE                      |
+| EXCEPTIONAL CLEARANCE                  | JUVENILE CITED                         |
+| JUVENILE DIVERTED                      | JUVENILE BOOKED                        |
+|                                        | LOCATED                                |
+|                                        | PROSECUTED BY OUTSIDE AGENCY           |
+|                                        | COMPLAINANT REFUSES TO PROSECUTE       |
+|                                        | DISTRICT ATTORNEY REFUSES TO PROSECUTE |
+|                                        | PROSECUTED FOR LESSER OFFENSE          |
 
 This project will address the following predictive question:  
 What are the strongest predictors for whether a crime instance in San Francisco resulted in someone being "processed" or "not processed" into the justice system?
@@ -31,11 +45,30 @@ The final report of the project can be found [here](https://github.com/bettybhzh
 
 # Analysis Pipeline
 
-## Usage:
+### Usage using Docker:
+To run this analysis using Docker, execute the following steps:
 
-1. Clone this repo.
+1. Clone this repository
+2. Pull the Docker image from Docker Hub using the follwing command:
+   ```
+   docker pull bettybhz/san_francisco_crime_resolution_model
+   ```
+2. Navigate to the root of this project on your computer using the command line.
+3. Execute the following command by filling in <PATH_ON_YOUR_COMPUTER> with the absolute path to the root of this project on your computer).
 
-2. Run the following commands:
+    ```
+    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' all
+    ```
+    Execute the following command to clean up the analysis:
+    
+    ```
+    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' clean
+    
+### Usage from command line:
+
+1. Clone this repository
+
+2. From the root of the project, run the following commands:
 
 ```bash
 python src/01_clean_data.py 1000 data/san_francisco_clean.csv
@@ -45,14 +78,20 @@ python src/04_decison_tree.py data/san_francisco_features.csv data/feature_resul
 Rscript src/03_Exploratory_SF_map.R data/san_francisco_clean.csv results/figures/
 Rscript -e "rmarkdown::render('docs/san_francisco_report.Rmd')"
 ```
-Or, run all scripts using the following command:
+Or, run all scripts from the root using the following command:
 
 ```bash
 make all
 ```
 
+To clean up analysis, run:
+
+```bash
+make clean
+```
+    
 ## Dependencies:
-- R & R libraries
+- R v1.1.456 & R libraries
   - `rmarkdown` v1.10  
   - `knitr` v1.20  
   - `tidyverse`v 1.2.1  
