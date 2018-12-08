@@ -45,7 +45,26 @@ The final report of the project can be found [here](https://github.com/bettybhzh
 
 # Analysis Pipeline
 
-## Usage:
+### Usage using Docker:
+To run this analysis using Docker, execute the following steps:
+
+1. Clone this repository
+2. Pull the Docker image from Docker Hub using the follwing command:
+   ```
+   docker pull bettybhz/san_francisco_crime_resolution_model
+   ```
+2. Navigate to the root of this project on your computer using the command line.
+3. Execute the following command by filling in <PATH_ON_YOUR_COMPUTER> with the absolute path to the root of this project on your computer).
+
+    ```
+    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' all
+    ```
+    Execute the following command to clean up the analysis:
+    
+    ```
+    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' clean
+    
+### Usage from command line:
 
 1. Clone this repository
 
@@ -65,23 +84,11 @@ Or, run all scripts from the root using the following command:
 make all
 ```
 
-To run this analysis using Docker, execute the following steps:
+To clean up analysis, run:
 
-1. Clone this repository
-2. Pull the Docker image from Docker Hub using the follwing command:
-   ```
-   docker pull bettybhz/san_francisco_crime_resolution_model
-   ```
-2. Navigate to the root of this project on your computer using the command line.
-3. Execute the following command by filling in <PATH_ON_YOUR_COMPUTER> with the absolute path to the root of this project on your computer).
-
-    ```
-    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' all
-    ```
-    Execute the following command to clean up the analysis:
-    
-    ```
-    docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' clean
+```bash
+make clean
+```
     
 ## Dependencies:
 - R v1.1.456 & R libraries
