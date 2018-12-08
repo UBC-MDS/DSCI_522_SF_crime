@@ -87,8 +87,8 @@ From the histogram above, there is approximately a 2:1 ratio between non-process
     | Day of week     | Categorical  |
     | Time            | Continuous   |
     | Police District | Categorical  |
-    | Longitude (x)      | Continuous   |
-    | Latitude (y)      | Continuous   |
+    | Longitude       | Continuous   |
+    | Latitude        | Continuous   |
 
     ***Table 2. Features used to build the decision tree classifier***
 
@@ -125,7 +125,7 @@ If we evaluate the performance of our model we can see that it has an accuracy o
 
 |                  |         |
 |:-----------------|--------:|
-| Testing Accuracy |  82.214%|
+| Testing Accuracy |  82.278%|
 
 6.0 Assumptions
 ---------------

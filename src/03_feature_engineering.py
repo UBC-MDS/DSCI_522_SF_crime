@@ -55,42 +55,47 @@ output_file = args.output_file
 # In[13]:
 
 
-# One Hot Encoding the cateogrical variables
 
-sf_data = pd.read_csv(input_file)
-sf_data = pd.get_dummies(
-    sf_data,
-    columns=[
-        'category', 'dayofweek', 'pddistrict', 'report_month', 'report_day'
-    ])
+def main():
+    # One Hot Encoding the cateogrical variables
 
-
-# In[15]:
-
-
-# Extracting the words in the descript column to be used as features
-
-cv = CountVectorizer(max_features=50, stop_words='english')
-description_features = cv.fit_transform(sf_data.descript).toarray()
-
-description_features_df = pd.DataFrame(
-    description_features, columns=sorted(cv.vocabulary_), index=sf_data.index)
+    sf_data = pd.read_csv(input_file)
+    sf_data = pd.get_dummies(
+        sf_data,
+        columns=[
+            'category', 'dayofweek', 'pddistrict', 'report_month', 'report_day'
+        ])
 
 
-# In[17]:
+    # In[15]:
 
 
-sf_data = pd.merge(
-    sf_data, description_features_df, left_index=True, right_index=True)
+    # Extracting the words in the descript column to be used as features
+
+    cv = CountVectorizer(max_features=50, stop_words='english')
+    description_features = cv.fit_transform(sf_data.descript).toarray()
+
+    description_features_df = pd.DataFrame(
+        description_features, columns=sorted(cv.vocabulary_), index=sf_data.index)
 
 
-# In[18]:
+    # In[17]:
 
 
-sf_data = sf_data.drop('descript', axis=1)
+    sf_data = pd.merge(
+        sf_data, description_features_df, left_index=True, right_index=True)
 
 
-# In[20]:
+    # In[18]:
 
 
-sf_data.to_csv(output_file, index_label=False, index=False)
+    sf_data = sf_data.drop('descript', axis=1)
+
+
+    # In[20]:
+
+
+    sf_data.to_csv(output_file, index_label=False, index=False)
+    
+if __name__ == '__main__':
+    main()

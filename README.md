@@ -60,10 +60,10 @@ To run this analysis using Docker, execute the following steps:
     docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' all
     ```
     Execute the following command to clean up the analysis:
-    
+
     ```
     docker run --rm -v PATH_ON_YOUR_COMPUTER:/home/San_Francisco_Crime_Resolution_Model bettybhz/san_francisco_crime_resolution_model make -C 'home/San_Francisco_Crime_Resolution_Model' clean
-    
+
 ### Usage from command line:
 
 1. Clone this repository
@@ -89,16 +89,16 @@ To clean up analysis, run:
 ```bash
 make clean
 ```
-    
+
 ## Dependencies:
-- R v1.1.456 & R libraries
+- R (v 3.5.1) & R libraries
   - `rmarkdown` v1.10  
   - `knitr` v1.20  
   - `tidyverse`v 1.2.1  
-  - `ggmap` v2.6.1 
+  - `ggmap` v2.6.1
   - `maps` v3.3.0
 
-- Python 3 & Python libraries:
+- Python (v 3.6.5) & Python libraries:
   - `matplotlib` v2.2.2
   - `numpy` v1.14.3
   - `seaborn` v0.9.0
@@ -106,4 +106,3 @@ make clean
   - `argparse` v1.1
   - `sklearn` v0.19.1
   - `pendulum` v2.0.4
-

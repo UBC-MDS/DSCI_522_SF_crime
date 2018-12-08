@@ -57,75 +57,78 @@ output_file = args.output_file
 
 # In[7]:
 
-
-sf_data = pd.read_csv(input_file)
-y = sf_data[['resolution']]
-X = sf_data.drop('resolution', axis = 1)
-
-
-# In[8]:
+def main():
+    sf_data = pd.read_csv(input_file)
+    y = sf_data[['resolution']]
+    X = sf_data.drop('resolution', axis = 1)
 
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.50)
+    # In[8]:
 
 
-# In[9]:
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.50)
 
 
-# Iterating thorugh different depths to find the optimal
-
-parameters = {'max_depth': np.arange(1, 30, 5)}
-
-tree = DecisionTreeClassifier(class_weight='balanced')
-clf = GridSearchCV(tree, parameters, cv=3)
-clf.fit(X_train, y_train)
+    # In[9]:
 
 
-# In[10]:
+    # Iterating thorugh different depths to find the optimal
+
+    parameters = {'max_depth': np.arange(1, 30, 5)}
+
+    tree = DecisionTreeClassifier(class_weight='balanced')
+    clf = GridSearchCV(tree, parameters, cv=3)
+    clf.fit(X_train, y_train)
 
 
-best_parameters = clf.best_params_
+    # In[10]:
 
 
-# In[11]:
+    best_parameters = clf.best_params_
 
 
-# Training our model
-
-tree = DecisionTreeClassifier(
-    class_weight='balanced', max_depth=best_parameters['max_depth'])
-
-tree.fit(X_train, y_train)
+    # In[11]:
 
 
-# In[26]:
+    # Training our model
+
+    tree = DecisionTreeClassifier(
+        class_weight='balanced', max_depth=best_parameters['max_depth'])
+
+    tree.fit(X_train, y_train)
 
 
-accuracy = tree.score(X_test, y_test)
+    # In[26]:
 
 
-# In[12]:
+    accuracy = tree.score(X_test, y_test)
 
 
-feature_results = pd.DataFrame({
-    'features': X.columns.tolist(),
-    'feature_importance': tree.feature_importances_
-})
-
-feature_results = feature_results.sort_values(
-    'feature_importance', ascending=False)
-feature_results = feature_results.query('feature_importance > 0.01')
+    # In[12]:
 
 
-# In[27]:
+    feature_results = pd.DataFrame({
+        'features': X.columns.tolist(),
+        'feature_importance': tree.feature_importances_
+    })
+
+    feature_results = feature_results.sort_values(
+        'feature_importance', ascending=False)
+    feature_results = feature_results.query('feature_importance > 0.01')
 
 
-feature_results = pd.concat([pd.DataFrame({'features':['TEST_ACCURACY'],
-                        'feature_importance' : [accuracy]}),
-          feature_results])
+    # In[27]:
 
 
-# In[ ]:
+    feature_results = pd.concat([pd.DataFrame({'features':['TEST_ACCURACY'],
+                            'feature_importance' : [accuracy]}),
+              feature_results])
 
 
-feature_results.to_csv(output_file)
+    # In[ ]:
+
+
+    feature_results.to_csv(output_file)
+
+if __name__ == "__main__":
+    main()
